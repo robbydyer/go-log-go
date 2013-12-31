@@ -44,7 +44,7 @@ func NewGolog (filename string, query string, max_parsers int, is_regex bool, da
 
     active_readers := 0
     var line_num int64
-    line_num = 1
+    line_num = 0
     data := make(map[int64]string)
     reader_chan := make(chan int) 
 
@@ -57,8 +57,8 @@ func NewGolog (filename string, query string, max_parsers int, is_regex bool, da
     scanner := bufio.NewScanner(file)
     for {
         for scanner.Scan() {
-            data[line_num] = scanner.Text()
             line_num++
+            data[line_num] = scanner.Text()
 
             // Check for line_buffer
             if len(data) >= line_buffer {
