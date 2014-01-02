@@ -14,7 +14,7 @@ import (
 // Globals
 var default_max_parsers int = 2 // Default max concurrent reader routines
 var line_buffer int = 1000      // Number of lines to buffer before analyzing
-var wait_between int = 5        // Time to wait between re-init'ing the scanner, in seconds
+var wait_between string = "1s"  // Time to wait between re-init'ing the scanner
 var total_matches int = 0       // Total number of matched lines
 var debug = flag.Bool("debug", false, "Debug mode")
 
@@ -103,7 +103,8 @@ func NewGolog(filename string, query string, max_parsers int, is_regex bool, dae
 
 		if gl.Daemon {
 			// Re-init Scanner
-			time.Sleep(2 * time.Second)
+			wait_time, _ := time.ParseDuration(wait_between)
+			time.Sleep(wait_time)
 			scanner = bufio.NewScanner(file)
 		} else {
 			break
