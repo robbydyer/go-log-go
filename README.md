@@ -9,7 +9,11 @@ Go-log-go is a File watcher/parser. It is essentially just a dumbed-down grep, w
       -max_threads=2: Max number of concurrent parse threads
       -query="Hello World": String or Regular Expression to parse for
 
-## Example
+## Examples
     golog -file="testlog.txt" -query="Hello World"
         Total lines processed: 1000
         Total matches: 4
+
+    golog -file="testlog.txt" -query="^X$" -is_regex=true
+        Total lines processed: 1000
+        Total matches: 3
