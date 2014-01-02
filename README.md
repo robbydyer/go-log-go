@@ -1,4 +1,5 @@
 # Go Log Go
+Go-log-go is a File watcher/parser. It is essentially just a dumbed-down grep, with a daemon mode. You can have it scan a file for either a string, or a regular expression.
 
     Usage of golog:
       -daemon=false: Mark as true to run in daemon mode
