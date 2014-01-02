@@ -29,6 +29,7 @@ type Golog struct {
 
 type MatchLine struct {
 	Host       string
+	Filename   string
 	Query      string
 	LineNumber int64
 	Timestamp  string
@@ -51,7 +52,7 @@ func NewGolog(filename string, query string, max_parsers int, is_regex bool, dae
 	gl.Filename = filename
 	gl.Query = query
 	gl.Daemon = daemon
-	gl.Host = "localhost"
+	gl.Host, _ = os.Hostname()
 
 	if max_parsers < 1 {
 		gl.Max_parsers = default_max_parsers
@@ -150,6 +151,7 @@ func (gl *Golog) parse(data map[int64]string, active_readers *int, reader_chan c
 			// Construct MatchLine obj for syslog
 			matchline := MatchLine{
 				Host:       gl.Host,
+				Filename:   gl.Filename,
 				Query:      gl.Query,
 				LineNumber: line_num,
 				LogMessage: line_data,
